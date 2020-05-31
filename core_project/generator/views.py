@@ -4,7 +4,14 @@ from django.http import HttpResponse
 import random
 
 def home(request):
+    """Display the homepage"""
     return render(request, 'generator/home.html')
+
+def about(request):
+    """Display about section of the WebApp"""
+    about = 'This is a pasword generator created by Raghvender. Enjoy fam!'
+
+    return render(request, 'generator/about.html', {'display_about': about})
 
 def password(request):
     characters = list('abcdefghijklmnopqrstuvwxyz')
@@ -14,7 +21,7 @@ def password(request):
 
     if request.GET.get('special'):
         characters.extend(list('!@#$%^&*()'))
-        
+
     if request.GET.get('numbers'):
         characters.extend(list('0123456789'))
 
