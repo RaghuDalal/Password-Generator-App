@@ -27,10 +27,15 @@ def password(request):
 
     length = int(request.GET.get('length', 12))
 
-    message = 'Could not create password shorter than 6 characters! It is too weak'
+    message = 'Could not create password shorter than 6 characters!'
 
     if length <= 5:
         return render(request, 'generator/error.html', {'error_message': message})
+
+    limit_message = 'Password is too long!'
+
+    if length >= 23:
+        return render(request, 'generator/large_pass_error.html', {'max_limit': limit_message})
 
     thepassword = ''
     for x in range(length):
