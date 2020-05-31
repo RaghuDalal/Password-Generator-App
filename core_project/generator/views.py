@@ -9,7 +9,7 @@ def home(request):
 
 def about(request):
     """Display about section of the WebApp"""
-    about = 'This is a pasword generator created by Raghvender. Enjoy fam!'
+    about = 'This is a pasword generator created by Raghu Dalal. Enjoy fam!'
 
     return render(request, 'generator/about.html', {'display_about': about})
 
@@ -26,6 +26,11 @@ def password(request):
         characters.extend(list('0123456789'))
 
     length = int(request.GET.get('length', 12))
+
+    message = 'Could not create password shorter than 6 characters! It is too weak'
+
+    if length <= 5:
+        return render(request, 'generator/error.html', {'error_message': message})
 
     thepassword = ''
     for x in range(length):
